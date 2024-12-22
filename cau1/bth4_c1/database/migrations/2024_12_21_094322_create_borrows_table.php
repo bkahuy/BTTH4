@@ -13,18 +13,14 @@ return new class extends Migration
     {
         Schema::create('borrows', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('reader_id');
-            $table->unsignedBigInteger('book_id');
+            $table->foreignId('reader_id')->constrained('readers')->onDelete('cascade');
+            $table->foreignId('book_id')->constrained('books')->onDelete('cascade');
             $table->date('borrow_date');
             $table->date('return_date');
             $table->boolean('status')->default(0); // 0: Đang mượn, 1: Đa trả
             $table->timestamps();
-//đây là điểm khác biệt so với BTTH03 mà SV cần lưu ý
-            $table->foreign('reader_id')->references('id')->on('readers');
-            $table->foreign('book_id')->references('id')->on('books');
         });
     }
-
     /**
      * Reverse the migrations.
      */
