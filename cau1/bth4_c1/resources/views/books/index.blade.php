@@ -2,10 +2,9 @@
 @section('title', 'quan ly sach')
 
 @section('main')
-    <h2>danh sach</h2>
-
-    <a href="{{ route('books.create') }}" class="add btn btn-primary font-weight-bold todo-list-add-btn">Thêm sách</a>
-    <table class="table">
+<div class="container">
+    <a href="{{ route('books.create') }}" class="add btn btn-primary font-weight-bold todo-list-add-btn" style="float: right;">Thêm sách</a>
+    <table class="table table-bordered">
         <thead>
         <tr>
             <th scope="col">Tên sách</th>
@@ -57,4 +56,5 @@
         @endforeach
         </tbody>
     </table>
+</div>
 @endsection

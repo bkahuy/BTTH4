@@ -10,19 +10,27 @@
 </head>
 <body>
 <header>
-    <h2>TRANG QUẢN LÝ THƯ VIỆN</h2>
-    <h3>@yield('title')</h3>
-    <ul class="nav">
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ route('books.index') }}">Trang quản lý sách</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('reads.index') }}">Trang quản lý người đọc</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('borrows.index') }}">Trang quản lý mượn sách</a>
-        </li>
-    </ul>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Thư viện</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ route('books.index') }}">Sách</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('reads.index') }}">Người mượn</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('borrows.index') }}">Lịch sử mượn</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 </header>
 
 <main>
@@ -32,7 +40,7 @@
 <footer>
     <ul class="nav justify-content-end">
         <li class="nav-item">
-            <p class="nav-link active">Đây là footer</p>
+            <p class="nav-link active"></p>
         </li>
 
     </ul>
