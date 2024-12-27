@@ -39,9 +39,6 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Lưu</button>
-
-
-
         </form>
     </div>
 @endsection

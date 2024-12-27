@@ -39,6 +39,7 @@ class BorrowController extends Controller
             'borrow_date' => 'required|date',
             'return_date' => 'nullable|date|after:borrow_date',
         ]);
+        $validate['status'] = 0;
         Borrow::create($validate);
         return redirect()->route('borrows.index')->with('success', 'Add success');
     }
