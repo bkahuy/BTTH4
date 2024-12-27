@@ -36,8 +36,8 @@
                 @foreach ($borrows as $borrow)
                     <tr>
                         <td>{{ $borrow->book->name }}</td>
-                        <td>{{ $borrow->borrow_date->format('d/m/Y') }}</td>
-                        <td>{{ $borrow->return_date ? $borrow->return_date->format('d/m/Y') : 'Chưa trả' }}</td>
+                        <td>{{ $borrow->borrow_date }}</td>
+                        <td>{{ $borrow->return_date ? $borrow->return_date : 'Chưa trả' }}</td>
                         <td>{{ $borrow->status ? 'Đã trả' : 'Chưa trả' }}</td>
                     </tr>
                 @endforeach
