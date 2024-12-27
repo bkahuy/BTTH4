@@ -7,60 +7,64 @@ use Illuminate\Http\Request;
 
 class ReaderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Hiển thị danh sách độc giả
     public function index()
     {
         $reads = Reader::all();
         return view('reads.index', compact('reads'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Hiển thị form thêm mới
     public function create()
     {
-        //
+        return view('reads.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Xử lý thêm mới độc giả
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'birthday' => 'required|date',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+        ]);
+
+        Reader::create($validated);
+
+        return redirect()->route('reads.index')->with('success', 'Độc giả được thêm mới thành công!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    // Hiển thị form chỉnh sửa
+    public function edit($id)
     {
-        //
+        $reader = Reader::findOrFail($id);
+        return view('reads.edit', compact('reader'));
+        return redirect()->route('reads.index')->with('success', 'Độc giả được thêm mới thành công!');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    // Xử lý chỉnh sửa thông tin độc giả
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'birthday' => 'required|date',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+        ]);
+
+        $reader = Reader::findOrFail($id);
+        $reader->update($validated);
+
+        return redirect()->route('reads.index')->with('success', 'Thông tin độc giả được cập nhật thành công!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    // Xử lý xóa độc giả
+    public function destroy($id)
     {
-        //
-    }
+        $reader = Reader::findOrFail($id);
+        $reader->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('reads.index')->with('success', 'Độc giả đã được xóa thành công!');
     }
 }
