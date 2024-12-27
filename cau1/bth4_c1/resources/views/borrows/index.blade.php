@@ -25,7 +25,8 @@
                 <td>{{ $borrow->book->name }}</td>
                 <td>{{ $borrow->borrow_date }}</td>
                 <td>{{ $borrow->return_date }}</td>
-                <td>{{ $borrow->status }}</td>
+                <td>{{ $borrow->status == 1 ? 'Đã trả' : 'Chưa trả' }}</td>
+
                 <td>
                     <a href="{{ route('borrows.edit', $borrow->id) }}"><i class="bi bi-pencil me-3"></i></a>
                     <a class="bi bi-trash3 ms-3" data-bs-toggle="modal" data-bs-target="#{{$borrow->id}}"></a>
@@ -37,7 +38,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    Bạn chắc chắn muốn xóa id mượn  "{{$borrow->name}}" không?
+                                    Bạn chắc chắn muốn xóa id mượn {{$borrow->id}} không?
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
