@@ -5,10 +5,10 @@
     <h2>danh sach</h2>
 
     <a href="{{ route('borrows.create') }}" class="add btn btn-primary font-weight-bold todo-list-add-btn">Thêm mượn sách</a>
+    <a href="{{ route('borrows.history') }}" class="add btn btn-primary font-weight-bold todo-list-add-btn">Lịch sử mượn sách của độc giả</a>
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">id</th>
             <th scope="col">Tên người mượn</th>
             <th scope="col">Tên sách mượn</th>
             <th scope="col">Ngày mượn</th>
@@ -20,7 +20,6 @@
         <tbody>
         @foreach($borrows as $borrow)
             <tr>
-                <th scope="row">{{ $borrow->id }}</th>
                 <td>{{ $borrow->reader->name }}</td>
                 <td>{{ $borrow->book->name }}</td>
                 <td>{{ $borrow->borrow_date }}</td>
@@ -34,11 +33,11 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">XOA MUON {{$borrow->id}}</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">XÓA ID MƯỢN {{$borrow->id}}</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    Bạn chắc chắn muốn xóa id mượn {{$borrow->id}} không?
+                                    Bạn chắc chắn muốn xóa không?
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

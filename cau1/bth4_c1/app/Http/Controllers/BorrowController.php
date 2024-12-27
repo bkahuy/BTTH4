@@ -49,8 +49,7 @@ class BorrowController extends Controller
      */
     public function show(string $id)
     {
-        $borrows = Borrow::find($id);
-        return view('borrows.show', compact('borrows'));
+
     }
 
     /**
@@ -91,4 +90,19 @@ class BorrowController extends Controller
         $borrows->delete();
         return redirect()->route('borrows.index');
     }
+    public function showHistoryForm()
+    {
+        $readers = Reader::all();
+        return view('borrows.history', compact('readers'));
+    }
+
+    public function getBorrowsHistory(Request $request)
+    {
+        $reader = Reader::findOrFail($request->reader_id);
+        $borrows = $reader->borrows()->with('book')->get();
+
+        return view('borrows.history', compact('reader', 'borrows'));
+    }
+
+
 }

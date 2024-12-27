@@ -27,6 +27,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('borrows.index') }}">Lịch sử mượn</a>
                     </li>
+
                 </ul>
             </div>
         </div>

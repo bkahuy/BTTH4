@@ -18,7 +18,10 @@ class Borrow extends Model
     {
         return $this->belongsTo(Reader::class);
     }
-    public function book(){
+
+    public function book()
+    {
         return $this->belongsTo(Book::class);
     }
+
 }
