@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Borrow;
+use App\Models\Reader;
 use Illuminate\Http\Request;
 
 class BorrowController extends Controller
@@ -21,7 +23,9 @@ class BorrowController extends Controller
      */
     public function create()
     {
-        //
+        $readers = Reader::all();
+        $books = Book::all();
+        return view('borrows.add', compact('readers', 'books'));
     }
 
     /**
@@ -29,7 +33,15 @@ class BorrowController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'reader_id' => 'required|exists:readers,id',
+            'book_id' => 'required|exists:books,id',
+            'borrow_date' => 'required|date',
+            'return_date' => 'nullable|date|after:borrow_date',
+        ]);
+        $validate['status'] = 0;
+        Borrow::create($validate);
+        return redirect()->route('borrows.index')->with('success', 'Add success');
     }
 
     /**
@@ -37,7 +49,8 @@ class BorrowController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $borrows = Borrow::find($id);
+        return view('borrows.show', compact('borrows'));
     }
 
     /**
@@ -45,7 +58,8 @@ class BorrowController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $borrows = Borrow::find($id);
+        return view('borrows.edit', compact('borrows'));
     }
 
     /**
@@ -53,14 +67,24 @@ class BorrowController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validate = $request->validate([
+            'borrow_date' => 'required|date',
+            'return_date' => 'nullable|date|after:borrow_date',
+            'status' => 'required|boolean',
+        ]);
+        $borrows = Borrow::findOrFail($id);
+        $borrows->update($request->only(['borrow_date', 'return_date', 'status']));
+        return redirect()->route('borrows.index')->with('success', 'Update success');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $borrows = Borrow::find($id);
+        $borrows->delete();
+        return redirect()->route('borrows.index');
     }
 }
