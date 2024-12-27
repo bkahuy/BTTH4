@@ -36,14 +36,14 @@
             <div class="form-group">
                 <label for="borrow_date">Ngày mượn</label>
                 <input type="date" name="borrow_date" id="borrow_date" class="form-control"
-                       value="{{ old('borrow_date', $borrows->borrow_date->format('Y-m-d')) }}">
+                       value="{{ $borrows->borrow_date }}">
             </div>
 
             <!-- Ngày trả -->
             <div class="form-group">
                 <label for="return_date">Ngày trả</label>
                 <input type="date" name="return_date" id="return_date" class="form-control"
-                       value="{{ old('return_date', $borrows->return_date ? $borrows->return_date->format('Y-m-d') : '') }}">
+                       value="{{ $borrows->return_date }}">
             </div>
 
             <div class="form-group">

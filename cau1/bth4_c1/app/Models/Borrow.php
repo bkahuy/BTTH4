@@ -10,10 +10,7 @@ class Borrow extends Model
     use HasFactory;
     protected $fillable = ['reader_id', 'book_id', 'borrow_date', 'return_date', 'status'];
 
-    protected $casts = [
-        'borrow_date' => 'datetime',
-        'return_date' => 'datetime',
-    ];
+
     public function reader()
     {
         return $this->belongsTo(Reader::class);

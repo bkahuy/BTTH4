@@ -76,7 +76,7 @@ class BorrowController extends Controller
             'return_date' => 'nullable|date|after:borrow_date',
             'status' => 'required|boolean',
         ]);
-        $borrows = Borrow::findOrFail($id);
+        $borrows = Borrow::find($id);
         $borrows->update($validate);
         return redirect()->route('borrows.index')->with('success', 'Update success');
     }

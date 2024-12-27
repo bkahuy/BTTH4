@@ -21,7 +21,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.add');
     }
 
     /**
@@ -29,7 +29,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'price' => 'required|string|max:255',
+            'quantity' => 'required|integer|min:1',
+        ]);
+        Book::create($validate);
+        return redirect()->route('books.index');
     }
 
     /**

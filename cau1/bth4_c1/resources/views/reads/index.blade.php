@@ -14,7 +14,7 @@
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
             <tr>
-                <th scope="col" class="text-center">ID</th>
+
                 <th scope="col">Tên người đọc</th>
                 <th scope="col">Ngày sinh</th>
                 <th scope="col">Địa chỉ</th>
@@ -25,7 +25,7 @@
             <tbody>
             @foreach($reads as $read)
                 <tr>
-                    <th scope="row" class="text-center">{{ $read->id }}</th>
+
                     <td>{{ $read->name }}</td>
                     <td>{{ $read->birthday }}</td>
                     <td>{{ $read->address }}</td>
@@ -33,7 +33,7 @@
                     <td class="text-center">
                         <!-- Nút sửa (Chưa có action ở đây) -->
                         <a href="{{ route('reads.edit', $read->id) }}" class="btn btn-warning btn-sm me-2" title="Sửa">
-                            <i class="fas fa-edit"></i>
+                            <i class="bi bi-pencil me-3"></i>
                         </a>
 
                         <!-- Nút xóa -->
@@ -41,7 +41,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm ms-2" title="Xóa">
-                                <i class="fas fa-trash-alt"></i>
+                                <i class="bi bi-trash3 ms-3"></i>
                             </button>
                         </form>
                     </td>
