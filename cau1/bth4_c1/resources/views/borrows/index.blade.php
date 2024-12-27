@@ -2,10 +2,10 @@
 @section('title', 'quan ly muon sach')
 
 @section('main')
-    <h2>danh sach</h2>
-
+<div style="float: right">
     <a href="{{ route('borrows.create') }}" class="add btn btn-primary font-weight-bold todo-list-add-btn">Thêm mượn sách</a>
     <a href="{{ route('borrows.history') }}" class="add btn btn-primary font-weight-bold todo-list-add-btn">Lịch sử mượn sách của độc giả</a>
+</div>
     <table class="table">
         <thead>
         <tr>
