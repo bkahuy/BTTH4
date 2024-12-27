@@ -28,7 +28,30 @@
                 <td>{{ $borrow->status }}</td>
                 <td>
                     <a href="{{ route('borrows.edit', $borrow->id) }}"><i class="bi bi-pencil me-3"></i></a>
-                    <a href=""><i class="bi bi-trash3 ms-3"></i></a>
+                    <a class="bi bi-trash3 ms-3" data-bs-toggle="modal" data-bs-target="#{{$borrow->id}}"></a>
+                    <div class="modal fade" id="{{$borrow->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">XOA MUON {{$borrow->id}}</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Bạn chắc chắn muốn xóa id mượn  "{{$borrow->name}}" không?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <form action="{{ route('borrows.destroy', $borrow->id) }}" method="POST" style="display: inline-block;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">OK</button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </td>
             </tr>
         @endforeach

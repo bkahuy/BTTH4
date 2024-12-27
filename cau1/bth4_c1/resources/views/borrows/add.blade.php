@@ -7,7 +7,6 @@
 
         <form action="{{ route('borrows.store') }}" method="POST">
             @csrf
-            @method('PUT')
             <div class="form-group">
                 <label for="reader_id">Tên đọc giả</label>
                 <select name="reader_id" id="reader_id" class="form-control">

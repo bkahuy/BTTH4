@@ -48,7 +48,8 @@ class BorrowController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $borrows = Borrow::find($id);
+        return view('borrows.show', compact('borrows'));
     }
 
     /**
@@ -66,14 +67,15 @@ class BorrowController extends Controller
     public function update(Request $request, string $id)
     {
         $validate = $request->validate([
+            'borrow_date' => 'required|date',
+            'return_date' => 'nullable|date|after:borrow_date',
             'status' => 'required|boolean',
-
         ]);
         $borrows = Borrow::findOrFail($id);
-        $borrows->status = $request->has('status') ? 1 : 0;
-        $borrows->update($validate);
+        $borrows->update($request->only(['borrow_date', 'return_date', 'status']));
         return redirect()->route('borrows.index')->with('success', 'Update success');
     }
+
 
     /**
      * Remove the specified resource from storage.
