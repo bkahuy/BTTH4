@@ -1,67 +1,60 @@
 @extends('welcome')
+@section('title', 'Chỉnh sửa mượn sách')
 
-@section('title', 'sua muon sach')
 @section('main')
     <div class="container">
-        <h1>Chỉnh sửa</h1>
+        <h1>Chỉnh sửa mượn sách</h1>
 
-        <form action="{{route('borrows.update', $borrows)}}" method="POST">
+        <form action="{{ route('borrows.update', $borrows->id) }}" method="POST">
             @csrf
             @method('PUT')
-            <div class = 'form-group'>
-                <label for="name">Tên người mượn</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{$borrows->reader->name}}">
-            </div>
+
             <div class="form-group">
-                <label for="name">Tên sách mượn</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{$borrows->book->name}}">
+                <label for="reader_id">Tên đọc giả</label>
+                <select name="reader_id" id="reader_id" class="form-control">
+                    <option value="">-- Chọn người đọc --</option>
+                    @foreach ($readers as $reader)
+                        <option value="{{ $reader->id }}" {{ $borrows->reader_id == $reader->id ? 'selected' : '' }}>
+                            {{ $reader->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
+
             <div class="form-group">
-                <label for="date">Ngày mượn</label>
-                <input type="date" class="form-control" id="date" name="date" value="{{$borrows->borrow_date}}">
+                <label for="book_id">Sách</label>
+                <select name="book_id" id="book_id" class="form-control">
+                    <option value="">-- Chọn sách --</option>
+                    @foreach ($books as $book)
+                        <option value="{{ $book->id }}" {{ $borrows->book_id == $book->id ? 'selected' : '' }}>
+                            {{ $book->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
+
+
+            <!-- Ngày mượn -->
             <div class="form-group">
-                <label for="date">Ngày trả</label>
-                <input type="date" class="form-control" id="date" name="date" value="{{$borrows->return_date}}">
+                <label for="borrow_date">Ngày mượn</label>
+                <input type="date" name="borrow_date" id="borrow_date" class="form-control"
+                       value="{{ old('borrow_date', $borrows->borrow_date->format('Y-m-d')) }}">
             </div>
+
+            <!-- Ngày trả -->
+            <div class="form-group">
+                <label for="return_date">Ngày trả</label>
+                <input type="date" name="return_date" id="return_date" class="form-control"
+                       value="{{ old('return_date', $borrows->return_date ? $borrows->return_date->format('Y-m-d') : '') }}">
+            </div>
+
             <div class="form-group">
                 <label for="status">Tình trạng</label>
-                <div style="display: flex; align-items: center;">
-                    <input type="checkbox" class="form-control" id="status" name="status" value="1"
-                           style="
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #007bff;
-            border-radius: 4px;
-            outline: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        "
-                        {{ $borrows->status == 1 ? 'checked' : '' }}
-                    >
-                    <style>
-                        #status:checked {
-                            background-color: #007bff;
-                            border-color: #007bff;
-                        }
-
-                        #status:checked::after {
-                            content: '\2713'; /* Dấu tick */
-                            color: white;
-                            display: block;
-                            font-size: 14px;
-                            text-align: center;
-                            line-height: 20px;
-                        }
-                    </style>
-                </div>
+                <input type="hidden" name="status" value="0">
+                <input type="checkbox" id="status" name="status" value="1" {{ $borrows->status ? 'checked' : '' }}>
             </div>
 
             <button type="submit" class="btn btn-primary">Lưu</button>
         </form>
     </div>
-
-
-
 @endsection

@@ -59,7 +59,9 @@ class BorrowController extends Controller
     public function edit(string $id)
     {
         $borrows = Borrow::find($id);
-        return view('borrows.edit', compact('borrows'));
+        $readers = Reader::all();
+        $books = Book::all();
+        return view('borrows.edit', compact('borrows', 'readers', 'books'));
     }
 
     /**
@@ -68,12 +70,14 @@ class BorrowController extends Controller
     public function update(Request $request, string $id)
     {
         $validate = $request->validate([
+            'reader_id' => 'required|exists:readers,id',
+            'book_id' => 'required|exists:books,id',
             'borrow_date' => 'required|date',
             'return_date' => 'nullable|date|after:borrow_date',
             'status' => 'required|boolean',
         ]);
         $borrows = Borrow::findOrFail($id);
-        $borrows->update($request->only(['borrow_date', 'return_date', 'status']));
+        $borrows->update($validate);
         return redirect()->route('borrows.index')->with('success', 'Update success');
     }
 
