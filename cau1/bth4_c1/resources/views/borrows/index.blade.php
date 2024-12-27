@@ -27,7 +27,7 @@
                 <td>{{ $borrow->return_date }}</td>
                 <td>{{ $borrow->status }}</td>
                 <td>
-                    <a href=""><i class="bi bi-pencil me-3"></i></a>
+                    <a href="{{ route('borrows.edit', $borrow->id) }}"><i class="bi bi-pencil me-3"></i></a>
                     <a href=""><i class="bi bi-trash3 ms-3"></i></a>
                 </td>
             </tr>
