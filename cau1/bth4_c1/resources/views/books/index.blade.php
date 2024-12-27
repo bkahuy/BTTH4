@@ -37,7 +37,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                ban co chac chan muon xoa {{$book->id}} khong
+                                ban co chac chan muon xoa quyen sach "{{$book->name}}" khong?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">huy</button>
