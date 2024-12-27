@@ -12,7 +12,6 @@
             <div class="form-group">
                 <label for="reader_id">Tên đọc giả</label>
                 <select name="reader_id" id="reader_id" class="form-control">
-                    <option value="">-- Chọn người đọc --</option>
                     @foreach ($readers as $reader)
                         <option value="{{ $reader->id }}" {{ $borrows->reader_id == $reader->id ? 'selected' : '' }}>
                             {{ $reader->name }}
@@ -24,7 +23,6 @@
             <div class="form-group">
                 <label for="book_id">Sách</label>
                 <select name="book_id" id="book_id" class="form-control">
-                    <option value="">-- Chọn sách --</option>
                     @foreach ($books as $book)
                         <option value="{{ $book->id }}" {{ $borrows->book_id == $book->id ? 'selected' : '' }}>
                             {{ $book->name }}
