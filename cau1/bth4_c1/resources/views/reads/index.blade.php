@@ -1,5 +1,5 @@
 @extends('welcome')
-@section('title', 'Quản lý người đọc')
+@section('title', 'quan ly doc gia')
 
 @section('main')
     <div class="container mt-5">
