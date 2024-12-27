@@ -67,4 +67,8 @@ class ReaderController extends Controller
 
         return redirect()->route('reads.index')->with('success', 'Độc giả đã được xóa thành công!');
     }
+    public function borrows()
+    {
+        return $this->hasMany(Borrow::class);
+    }
 }

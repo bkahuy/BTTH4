@@ -26,4 +26,11 @@ Route::put('reads/{read}', [ReaderController::class, 'update'])->name('reads.upd
 Route::delete('reads/{read}', [ReaderController::class, 'destroy'])->name('reads.destroy');
 
 
-Route::resource('borrows', BorrowController::class);
+Route::resource('borrows', BorrowController::class)->except(['show']);
+Route::get('borrows/history', [BorrowController::class, 'showHistoryForm'])->name('borrows.history');
+Route::post('borrows/history', [BorrowController::class, 'getBorrowsHistory'])->name('borrows.getHistory');
+
+
+
+
+
