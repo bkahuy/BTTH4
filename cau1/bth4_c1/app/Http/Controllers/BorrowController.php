@@ -98,11 +98,13 @@ class BorrowController extends Controller
 
     public function getBorrowsHistory(Request $request)
     {
+        $readers = Reader::all();
         $reader = Reader::findOrFail($request->reader_id);
         $borrows = $reader->borrows()->with('book')->get();
 
-        return view('borrows.history', compact('reader', 'borrows'));
+        return view('borrows.history', compact('readers', 'reader', 'borrows'));
     }
+
 
 
 }
