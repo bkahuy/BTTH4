@@ -13,3 +13,8 @@ Route::resource('products', ProductController::class);
 Route::resource('customers', CustomerController::class);
 Route::resource('orders', OrderController::class);
 Route::resource('order_details', OrderDetailController::class);
+
+Route::post('/orders/{order}/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
+Route::post('/orders/store', [OrderController::class, 'store'])->name('orders.store');
+
