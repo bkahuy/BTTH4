@@ -11,7 +11,7 @@ class Order extends Model
     protected $fillable = ['customer_id', 'order_date', 'status'];
 
     public function orderDetails(){
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Order_detail::class);
     }
 
     public function customer(){
