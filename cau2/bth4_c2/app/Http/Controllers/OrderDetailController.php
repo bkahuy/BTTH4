@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Order_detail;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderDetailController extends Controller
 {
@@ -11,7 +15,8 @@ class OrderDetailController extends Controller
      */
     public function index()
     {
-        //
+        $order_details = Order_detail::all();
+        return view('order_details.index', compact('order_details'));
     }
 
     /**
@@ -35,7 +40,10 @@ class OrderDetailController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $info = DB::select('select order_details.id , order_details.quantity, orders.id , products.id ,products.name from order_details
+    join orders on order_details.order_id = orders.id
+    JOIN products ON order_details.product_id = products.id where order_id = (select order_id from order_details where id = ? )', [$id]);
+        return view('Order_details.show', compact('info'));
     }
 
     /**
