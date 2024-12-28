@@ -26,6 +26,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('orders.index') }}">ĐƠN HÀNG</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('order_details.index') }}">CHI TIẾT ĐƠN HÀNG</a>
+                    </li>
                 </ul>
             </div>
         </div>

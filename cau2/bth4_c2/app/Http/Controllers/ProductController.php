@@ -24,9 +24,6 @@ class ProductController extends Controller
         return view('products.add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validate = $request->validate([
@@ -35,8 +32,8 @@ class ProductController extends Controller
             'price' => 'required|string|max:255',
             'quantity' => 'required|integer|min:1',
         ]);
-        Book::create($validate);
-        return redirect()->route('books.index');
+        Product::create($validate);
+        return redirect()->route('products.index');
     }
 
     /**
@@ -44,7 +41,8 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $products = Product::find($id);
+        return view('Products.show', compact('products'));
     }
 
     /**
@@ -52,7 +50,8 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $products = Product::find($id);
+        return view('Products.edit', compact('products'));
     }
 
     /**
@@ -60,7 +59,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validate = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'quantity' => 'required|integer|min:1',
+        ]);
+        $products = Product::find($id);
+        $products->update($validate);
+        return redirect()->route('products.index');
     }
 
     /**
@@ -68,6 +75,8 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $products = Product::find($id);
+        $products->delete();
+        return redirect()->route('products.index');
     }
 }
