@@ -28,9 +28,13 @@
 
                     <form action="{{ route('orders.updateStatus', $order->id) }}" method="POST" style="display: inline-block;">
                         @csrf
-                        <button type="submit" class="btn btn-info">
-                            <i class="bi bi-check-circle-fill"></i>
-                        </button>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="statusSwitch{{ $order->id }}" name="status"
+                                   @if($order->status == 'Đã thanh toán') checked @endif
+                                   onchange="this.form.submit();">
+                            <label class="form-check-label" for="statusSwitch{{ $order->id }}">
+                            </label>
+                        </div>
                     </form>
 
                     <a class="bi bi-trash3 ms-3" data-bs-toggle="modal" data-bs-target="#{{$order->id}}"></a>
